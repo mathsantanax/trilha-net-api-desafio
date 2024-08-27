@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TrilhaApiDesafio.Context;
-using TrilhaApiDesafio.Models;
+using trilha_net_api_desafio_net8.Context;
+using trilha_net_api_desafio_net8.Models;
 
 namespace TrilhaApiDesafio.Controllers
 {
@@ -26,7 +26,7 @@ namespace TrilhaApiDesafio.Controllers
             // TODO: Buscar o Id no banco utilizando o EF
             // TODO: Validar o tipo de retorno. Se não encontrar a tarefa, retornar NotFound,
             // caso contrário retornar OK com a tarefa encontrada
-            return Ok();
+            return Ok(tarefa);
         }
 
         [HttpGet("ObterTodos")]
@@ -45,7 +45,7 @@ namespace TrilhaApiDesafio.Controllers
                 return NotFound();
             // TODO: Buscar  as tarefas no banco utilizando o EF, que contenha o titulo recebido por parâmetro
             // Dica: Usar como exemplo o endpoint ObterPorData
-            return Ok();
+            return Ok(tarefaBanco);
         }
 
         [HttpGet("ObterPorData")]
@@ -101,7 +101,7 @@ namespace TrilhaApiDesafio.Controllers
             _context.SaveChanges();
             // TODO: Atualizar as informações da variável tarefaBanco com a tarefa recebida via parâmetro
             // TODO: Atualizar a variável tarefaBanco no EF e salvar as mudanças (save changes)
-            return Ok();
+            return CreatedAtAction(nameof(ObterPorId), new { id = tarefa.Id }, tarefa);;
         }
 
         [HttpDelete("{id}")]
